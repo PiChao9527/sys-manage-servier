@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.succ.manage_sys.dao.SuccOrderMapper">
+    <resultMap id="BaseResultMap" type="com.orderserver.succ.entity.SuccOrder">
+        <id property="orderId" jdbcType="INTEGER" column="orderId" />
+        <result property="orderUserId" jdbcType="INTEGER" column="orderUserId" />
+        <result property="orderName" jdbcType="VARCHAR" column="orderName" />
+        <result property="orderPrice" jdbcType="VARCHAR" column="orderPrice" />
+        <result property="orderCustomer" jdbcType="VARCHAR" column="orderCustomer" />
+        <result property="orderProgress" jdbcType="INTEGER" column="orderProgress" />
+        <result property="orderStatus" jdbcType="INTEGER" column="orderStatus" />
+        <result property="orderDescribe" jdbcType="VARCHAR" column="orderDescribe" />
+        <result property="orderMakedate" jdbcType="DATE" column="orderMakedate" />
+        <result property="orderUpdatedate" jdbcType="DATE" column="orderUpdatedate" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        orderId, orderuserId, orderName, orderPrice, orderCustomer, orderProgress, orderStatus,
+            orderDescribe,orderMakedate,orderUpdatedate
+    </sql>
+
+    <select id="getOrderList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM succorder
+    </select>
+
+    <select id="getOrderListPage" parameterType="Map" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM succorder
+        <if test="pageNum != null and pageSize != ''">
+            limit #{pageNum},#{pageSize}
+        </if>
+    </select>
+
+    <select id="selectOrderById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM succorder
+        WHERE orderId = #{orderId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="addOrder" parameterType="com.orderserver.succ.entity.SuccOrder">
+        INSERT INTO succorder(orderUserId, orderName, orderPrice, orderCustomer, orderProgress, orderStatus,
+                orderDescribe,orderMakedate,orderUpdatedate)
+        VALUES (#{orderUserId,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, #{orderPrice,jdbcType=VARCHAR},
+                #{orderCustomer,jdbcType=VARCHAR}, #{orderProgress,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER},
+                #{orderDescribe,jdbcType=VARCHAR}, #{orderMakedate,jdbcType=DATE}, #{orderUpdatedate,jdbcType=DATE})
+    </insert>
+
+    <delete id="deleteOrder" parameterType="java.lang.Integer">
+        DELETE FROM succorder
+        WHERE orderId = #{orderId,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.succ.manage_sys.dao.SuccOrderMapper">
+    <resultMap id="BaseResultMap" type="com.customerserver.succ.entity.SuccCustomer">
+        <id property="customerId" jdbcType="INTEGER" column="customerId" />
+        <result property="customerName" jdbcType="VARCHAR" column="customerName" />
+        <result property="customerOrg" jdbcType="INTEGER" column="customerOrg" />
+        <result property="customerNature" jdbcType="INTEGER" column="customerNature" />
+        <result property="customerLevel" jdbcType="INTEGER" column="customerLevel" />
+        <result property="customerNature" jdbcType="INTEGER" column="customerNature" />
+        <result property="customerOrders" jdbcType="INTEGER" column="customerOrders" />
+        <result property="contacts" jdbcType="VARCHAR" column="contacts" />
+        <result property="cellPhone" jdbcType="VARCHAR" column="cellPhone" />
+        <result property="landLine" jdbcType="VARCHAR" column="landLine" />
+        <result property="findUser" jdbcType="INTEGER" column="findUser" />
+        <result property="remark" jdbcType="VARCHAR" column="remark" />
+        <result property="LocalDateTime" jdbcType="DATE" column="LocalDateTime" />
+        <result property="LocalDateTime" jdbcType="DATE" column="LocalDateTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        orderId, orderuserId, orderName, orderPrice, orderCustomer, orderProgress, orderStatus,
+            orderDescribe,orderMakedate,orderUpdatedate
+    </sql>
+
+    <update id="updateCusOrder" parameterType="com.customerserver.succ.entity.SuccCustomer">
+        update SuccCustomer
+        set customerOrders = customerOrders + #{countCode,jdbcType=BIGINT}
+        where customerId = #{customerId,jdbcType=BIGINT}
+    </update>
+
+<!--    <insert id="addOrder" parameterType="com.orderserver.succ.entity.SuccOrder">-->
+<!--        INSERT INTO succorder(orderUserId, orderName, orderPrice, orderCustomer, orderProgress, orderStatus,-->
+<!--                orderDescribe,orderMakedate,orderUpdatedate)-->
+<!--        VALUES (#{orderUserId,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, #{orderPrice,jdbcType=VARCHAR},-->
+<!--                #{orderCustomer,jdbcType=VARCHAR}, #{orderProgress,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER},-->
+<!--                #{orderDescribe,jdbcType=VARCHAR}, #{orderMakedate,jdbcType=DATE}, #{orderUpdatedate,jdbcType=DATE})-->
+<!--    </insert>-->
+
+<!--    <delete id="deleteOrder" parameterType="java.lang.Integer">-->
+<!--        DELETE FROM succorder-->
+<!--        WHERE orderId = #{orderId,jdbcType=INTEGER}-->
+<!--    </delete>-->
+
+</mapper>
